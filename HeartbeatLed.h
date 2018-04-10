@@ -1,5 +1,5 @@
-#ifndef heartbeat_led
-#define heartbeat_led
+#ifndef __ARDUINO_HARTBEAT_LED
+#define __ARDUINO_HARTBEAT_LED
 
 #include "Arduino.h"
 
@@ -8,20 +8,20 @@ const unsigned long _default_sequence[] = {200, 125, 200, 600};
 
 class HeartbeatLed {
     public:
-        HeartbeatLed(int pin);
-        HeartbeatLed(int pin, unsigned long* sequence, byte sequence_length);
+        HeartbeatLed(byte pin_number);
+        HeartbeatLed(byte pin_number, unsigned long* sequence, byte sequence_length);
         void update();
 
     private:
-        int _pin;
+        byte _pin_number;
         byte _sequence_length;
         unsigned long* _sequence;
 
         unsigned long _last_update;
         byte _sequence_index;
-        boolean _state;
+        bool _state;
 
-        void _init(int pin);
+        void _init(byte pin_number);
 };
 
 #endif

@@ -1,24 +1,24 @@
-#include "heartbeat_led.h"
+#include "HeartbeatLed.h"
 
-void HeartbeatLed::_init (int pin) {
-    _pin = pin;
-    pinMode(_pin, OUTPUT);
+void HeartbeatLed::_init (byte pin_number) {
+    _pin_number = pin_number;
+    pinMode(_pin_number, OUTPUT);
 
     _last_update = 0;
     _sequence_index = 0;
     _state = true;
 };
 
-HeartbeatLed::HeartbeatLed (int pin) {
+HeartbeatLed::HeartbeatLed (byte pin_number) {
     _sequence = _default_sequence;
     _sequence_length = 4;
-    _init(pin);
+    _init(pin_number);
 };
 
-HeartbeatLed::HeartbeatLed (int pin, unsigned long* sequence, byte sequence_length) {
+HeartbeatLed::HeartbeatLed (byte pin_number, unsigned long* sequence, byte sequence_length) {
     _sequence = sequence;
     _sequence_length = sequence_length;
-    _init(pin);
+    _init(pin_number);
 };
 
 void HeartbeatLed::update () {
@@ -33,6 +33,6 @@ void HeartbeatLed::update () {
 
     _last_update = millis();
 
-    digitalWrite(_pin, _state ? HIGH : LOW);
+    digitalWrite(_pin_number, _state ? HIGH : LOW);
     _state = !_state;
 };
